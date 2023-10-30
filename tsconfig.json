@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": ["es6"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "types": ["reflect-metadata"],
+    "types": ["express", "inversify", "reflect-metadata"],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "$/*": ["generated/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "strict": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "allowUnreachableCode": false,
+    "inlineSources": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  }
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

@@ -11,32 +11,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var inversify_express_utils_1 = require("inversify-express-utils");
-var IUsersService_1 = require("./IUsersService");
-var inversify_1 = require("inversify");
-var UsersController = /** @class */ (function () {
-    function UsersController(_userService) {
+exports.UsersController = void 0;
+const IUsersService_1 = require("@/users/IUsersService");
+const inversify_1 = require("inversify");
+const runtime_1 = require("@tsoa/runtime");
+let UsersController = class UsersController {
+    constructor(_userService) {
         this._userService = _userService;
     }
-    UsersController.prototype.index = function (req, res, next) {
-        var users = this._userService.getUsers();
-        return res.status(200).json(users);
-    };
-    __decorate([
-        (0, inversify_express_utils_1.httpGet)("/"),
-        __param(0, (0, inversify_express_utils_1.request)()),
-        __param(1, (0, inversify_express_utils_1.response)()),
-        __param(2, (0, inversify_express_utils_1.next)()),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object, Object, Function]),
-        __metadata("design:returntype", void 0)
-    ], UsersController.prototype, "index", null);
-    UsersController = __decorate([
-        (0, inversify_express_utils_1.controller)("/users"),
-        __param(0, (0, inversify_1.inject)(IUsersService_1.IUsersService)),
-        __metadata("design:paramtypes", [Object])
-    ], UsersController);
-    return UsersController;
-}());
-exports.default = UsersController;
+    index() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const users = yield this._userService.getUsers();
+            return users;
+        });
+    }
+};
+exports.UsersController = UsersController;
+__decorate([
+    (0, runtime_1.Get)("/"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "index", null);
+exports.UsersController = UsersController = __decorate([
+    (0, runtime_1.Route)("users"),
+    (0, inversify_1.injectable)(),
+    __param(0, (0, inversify_1.inject)(IUsersService_1.IUsersService)),
+    __metadata("design:paramtypes", [Object])
+], UsersController);
+//# sourceMappingURL=users.controller.js.map

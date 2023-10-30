@@ -4,21 +4,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
-require("@/users/users.controller");
-var inversify_express_utils_1 = require("inversify-express-utils");
-var dotenv_1 = __importDefault(require("dotenv"));
-var cors_1 = __importDefault(require("cors"));
-var ioc_1 = __importDefault(require("@/ioc"));
+const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
+const ioc_1 = require("@/ioc");
+const morgan_1 = __importDefault(require("morgan"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const routes_1 = require("#/generated/routes");
 //For env File 
 dotenv_1.default.config();
-var ioc = new ioc_1.default();
-ioc.init();
-var server = new inversify_express_utils_1.InversifyExpressServer(ioc);
-server.setConfig(function (app) {
-    app.use((0, cors_1.default)());
+// Bind all dependencies
+ioc_1.iocContainer.init();
+const port = process.env.PORT || 8000;
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cors_1.default)());
+app.use((0, morgan_1.default)('tiny'));
+app.use(express_1.default.static("public"));
+app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(undefined, {
+    swaggerOptions: {
+        url: "/swagger.json",
+    },
+}));
+(0, routes_1.RegisterRoutes)(app);
+app.listen(port, () => {
+    console.log(`Server is Fire at http://localhost:${port}`);
 });
-var port = process.env.PORT || 8000;
-var app = server.build();
-app.listen(port, function () {
-    console.log("Server is Fire at http://localhost:".concat(port));
-});
+//# sourceMappingURL=index.js.map

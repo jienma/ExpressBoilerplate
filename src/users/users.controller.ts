@@ -1,17 +1,15 @@
-import { Request, Response, NextFunction } from "express";
-import { controller, httpGet, response, request, next } from "inversify-express-utils";
-import { IUsersService } from "./IUsersService";
-import { inject } from "inversify";
+import { IUsersService } from "@/users/IUsersService";
+import { inject, injectable } from "inversify";
+import { Get, Route } from "@tsoa/runtime";
 
-@controller("/users")
-class UsersController {
-    constructor(@inject(IUsersService) private readonly _userService: IUsersService){}
+@Route("users")
+@injectable()
+export class UsersController {
+    constructor(@inject(IUsersService) private readonly _userService: IUsersService) { }
 
-    @httpGet("/")
-    async index(@request() req: Request, @response() res: Response, @next() next: NextFunction){
+    @Get("/")
+    public async index(){
         const users = await this._userService.getUsers();
-        return res.status(200).json(users);
+        return users;
     }
 }
-
-export default UsersController;

@@ -3,28 +3,38 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon"
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "build": "tsoa spec-and-routes && tsc",
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tsoa/runtime": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "inversify": "^6.0.2",
-    "inversify-express-utils": "^6.4.5",
+    "inversify-binding-decorators": "^4.0.0",
     "mongodb": "^6.2.0",
     "mongoose": "^7.6.3",
-    "reflect-metadata": "^0.1.13"
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "reflect-metadata": "^0.1.13",
+    "swagger-ui-express": "^5.0.0",
+    "tsoa": "^5.1.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.15",
     "@types/express": "^4.17.20",
+    "@types/inversify-binding-decorators": "^2.0.0",
+    "@types/morgan": "^1.9.7",
     "@types/node": "^20.8.9",
+    "@types/passport": "^1.0.14",
+    "@types/swagger-ui-express": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
+    "concurrently": "^8.2.2",
     "eslint": "^8.52.0",
     "nodemon": "^3.0.1",
     "ts-node-dev": "^2.0.0",

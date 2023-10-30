@@ -1,25 +1,35 @@
 
 import "reflect-metadata";
-import "@/users/users.controller";
-
-import { InversifyExpressServer } from 'inversify-express-utils';
+import express, { Application } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import IOCContainer from '@/ioc';
+import { iocContainer } from '@/ioc';
+import morgan from "morgan";
+import swaggerUi from "swagger-ui-express";
+import { RegisterRoutes } from "$/routes";
+import SwaggerDoc from "$/swagger.json";
 
 //For env File 
 dotenv.config();
 
-const ioc = new IOCContainer();
-ioc.init();
-
-const server = new InversifyExpressServer(ioc);
-server.setConfig((app) => {
-	app.use(cors());
-});
+// Bind all dependencies
+iocContainer.init();
 
 const port = process.env.PORT || 8000;
-const app = server.build();
+const app: Application = express();
+
+app.use(express.json());
+app.use(cors());
+app.use(morgan('tiny'));
+app.use(express.static("public"));
+app.use(
+	"/docs",
+	swaggerUi.serve,
+	swaggerUi.setup(SwaggerDoc)
+);
+
+RegisterRoutes(app);
+
 app.listen(port, () => {
 	console.log(`Server is Fire at http://localhost:${port}`);
 });
