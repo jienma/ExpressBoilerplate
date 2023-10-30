@@ -1,6 +1,5 @@
 # Express Boilerplate
 
-![Node.js CI](https://github.com/YOUR_GITHUB_USERNAME/express-boilerplate/workflows/Node.js%20CI/badge.svg)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 Welcome to the Express Boilerplate project! This boilerplate provides a foundation for web applications integrating Express.js, Inversify for IOC, TypeScript, and MongoDB.
@@ -32,11 +31,14 @@ Welcome to the Express Boilerplate project! This boilerplate provides a foundati
 ## Scripts
 
 - **Build**: Transpile TypeScript to JavaScript.
+    ```bash
     npm run build
 
 - **Start**: Run the compiled application.
+    ```bash
     npm start
 
 - **Development Mode**: Watch for changes using nodemon.
+    ```bash
     npm run dev
 
