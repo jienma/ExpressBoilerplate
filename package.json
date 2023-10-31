@@ -10,6 +10,35 @@
   },
   "author": "",
   "license": "ISC",
+  "nodemonConfig": {
+    "execMap": {
+      "ts": "ts-node"
+  },
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 src/index.ts"
+  },
+  "eslintConfig": {
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+    }
+  },
   "dependencies": {
     "@tsoa/runtime": "^5.0.0",
     "dotenv": "^16.3.1",
