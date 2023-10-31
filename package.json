@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "lint": "eslint src/**/*.ts --fix",
     "test": "ts-mocha ./src/**/*.spec.ts -r tsconfig-paths/register",
     "build": "tsoa spec-and-routes && tsc",
     "start": "node dist/index.js"

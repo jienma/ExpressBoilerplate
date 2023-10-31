@@ -1,6 +1,5 @@
-import User from "@/users/User";
 import { IUsersService } from "@/users/IUsersService";
-import { injectable, inject } from "inversify";
+import { injectable } from "inversify";
 
 @injectable()
 class UsersService implements IUsersService {
