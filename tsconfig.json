@@ -4,7 +4,7 @@
     "lib": ["es6"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "types": ["express", "inversify", "reflect-metadata"],
+    "types": ["express", "inversify", "reflect-metadata", "mocha"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],

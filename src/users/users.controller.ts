@@ -8,7 +8,7 @@ export class UsersController {
     constructor(@inject(IUsersService) private readonly _userService: IUsersService) { }
 
     @Get("/")
-    public async index(){
+    async index(){
         const users = await this._userService.getUsers();
         return users;
     }
